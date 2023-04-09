@@ -3,14 +3,14 @@
 .checkout__hero__title{
     position: absolute;
     text-align: center;
-    top: 60px;
+    top: 80px;
     font-size: 60px;
     font-family: 'Roboto Condensed', sans-serif;
 }
 .checkout__hero__description{
     position: absolute;
     text-align: center;
-    top: 150px;
+    top: 170px;
     font-size: 30px;
 }
 
