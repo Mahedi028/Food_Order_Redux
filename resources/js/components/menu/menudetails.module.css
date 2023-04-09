@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300;1,500&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,400&family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Unbounded:wght@300;400;500;600;700&display=swap');
+
+.menu__hero__title{
+    position: absolute;
+    text-align: center;
+    top: 80px;
+    font-size: 60px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.menu__hero__description{
+    position: absolute;
+    text-align: center;
+    top: 170px;
+    font-size: 30px;
+}
+
+.main__image{
+    width: 490px;
+    height: 450px;
+    position: absolute;
+    top:30px;
+    left: 50px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.menu__details{
+    position: absolute;
+    top:250px;
+    left: 50px;
+    width: 95%;
+    height: 100vh;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
+}
+.sub__image1{
+    width: 150px;
+    position: absolute;
+    top:500px;
+    left: 50px;
+    border-radius: 10px;
+
+}
+.sub__image2{
+    width: 150px;
+    position: absolute;
+    top:500px;
+    left: 220px;
+    border-radius: 10px;
+}
+.sub__image3{
+    width: 150px;
+    position: absolute;
+    top:500px;
+    left: 390px;
+    border-radius: 10px;
+}
+.menu__details__des{
+    
+}

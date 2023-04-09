@@ -1,0 +1,13 @@
+.menu__container{
+    display: flex;
+    flex-direction:column;
+    padding: 30px 30px;
+}
+.menu__content{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.review__container{
+    
+}

@@ -1,0 +1,5 @@
+.layout__image
+{
+    object-fit: cover;
+    height: 145vh;
+}

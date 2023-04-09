@@ -1,0 +1,17 @@
+.sign__in__button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: crimson;
+    border: none;
+    color: #eee;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.button__icon{
+    font-size: 30px;
+    margin-right: 5px;
+}
