@@ -1,17 +1,19 @@
 import React from 'react'
 import classes from './textarea.module.css'
 const FormTextArea = (props) => {
+    const {label,name,rows,value,className,placeholder,onChange,errorMessage}=props
   return (
     <div className={classes.textarea__container}>
-        <label>{props.label}</label>
+        <label>{label}</label>
         <textarea
-            name={props.name}
-            rows={props.rows}
-            className={`${classes.select} ${props.className}`}
-            placeholder={props.placeholder}
-            onChange={props.onChange}
-        >{props.value}</textarea>
-        <span>{props.errorMessage}</span>
+            name={name}
+            rows={rows}
+            className={`${classes.select} ${className}`}
+            placeholder={placeholder}
+            onChange={onChange}
+        >{value}</textarea>
+        {/* <span>{props.errorMessage}</span> */}
+        <div className={classes.input__error}>{errorMessage}</div>
     </div>
   )
 }

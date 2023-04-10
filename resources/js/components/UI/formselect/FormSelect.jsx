@@ -1,17 +1,19 @@
 import React from 'react'
 import classes from  './formselect.module.css'
 const FormSelect = (props) => {
+    const {label,name,className,onChange,children,errorMessage}=props
   return (
     <div className={classes.select__container}>
-        <label>{props.label}</label>
+        <label>{label}</label>
         <select
-            name={props.name}
-            className={`${classes.select} ${props.className}`}
-            onChange={props.onChange}
+            name={name}
+            className={`${classes.select} ${className}`}
+            onChange={onChange}
         >
-        {props.children}
+        {children}
         </select>
-        <span>{props.errorMessage}</span>
+        {/* <span>{errorMessage}</span> */}
+        <div className={classes.input__error}>{errorMessage}</div>
     </div>
 
   )

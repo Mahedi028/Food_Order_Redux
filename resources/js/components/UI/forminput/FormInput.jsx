@@ -1,23 +1,24 @@
 import React from 'react'
 import classes from './forminput.module.css'
 const FormInput = (props) => {
+    const {name,value,type,className,placeholder,onChange,pattern,label,errorMessage}=props
   return (
     <div className={classes.input__container}>
-        <label htmlFor={props.name}>{props.label}</label>
+        <label htmlFor={name}>{label}</label>
         <input
-            name={props.name}
-            value={props.value}
-            type={props.type}
-            className={`${classes.input} ${props.className}`}
-            placeholder={props.placeholder}
-            onChange={props.onChange}
-            pattern={props.pattern}
-            required={props.required}
+            name={name}
+            value={value}
+            type={type}
+            className={`${classes.input} ${className}`}
+            placeholder={placeholder}
+            onChange={onChange}
+            pattern={pattern}
+            // required={props.required}
             // onBlur={handleFocus}
             // onFocus={()=>props.name==="password_confirmation" && setFocused(true)}
             // focused={focused.toString()}
         />
-        <span>{props.errorMessage}</span>
+        <div className={classes.input__error}>{errorMessage}</div>
     </div>
   )
 }

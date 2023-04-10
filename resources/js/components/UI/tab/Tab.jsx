@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import classes from './tab.module.css';
 import img1 from '../../../assets/categories/burger.png'
+import MenuCard from '../../menu/MenuCard';
 function CustomTab({ title, active, onClick, children, img }) {
   return (
     <div
@@ -28,13 +29,13 @@ function Tab() {
       id: 1,
       img:img1,
       title: 'burger',
-      content: <p>Content for Tab 1</p>,
+      content: <MenuCard/>,
     },
     {
       id: 2,
       img:img1,
       title: 'Tab 2',
-      content: <p>Content for Tab 2</p>,
+      content: <MenuCard/>,
     },
     {
       id: 3,

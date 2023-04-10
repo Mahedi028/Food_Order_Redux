@@ -16,14 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::middleware(['auth:sanctum,admin',config('jetstream.auth_session'),'verified'
-])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.admin_master');
-    })->name('admin.dashboard')->middleware('auth:admin');
+// Route::middleware(['auth:sanctum,admin',config('jetstream.auth_session'),'verified'
+// ])->group(function () {
+//     Route::get('/admin/dashboard', function () {
+//         return view('admin.admin_master');
+//     })->name('admin.dashboard')->middleware('auth:admin');
+// });
+
+Route::get('/admin/dashboard', function(){
+    return view('admin.index');
 });
-
-
 
 
 Route::get('/{path?}', function () {
