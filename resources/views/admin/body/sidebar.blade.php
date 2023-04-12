@@ -71,7 +71,7 @@
             <ul>
                 <li> <a href="{{route('category.add')}}"><i class="bx bx-right-arrow-alt"></i>Add</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>View</a>
+                <li> <a href="{{route('category.all')}}"><i class="bx bx-right-arrow-alt"></i>View</a>
                 </li>
             </ul>
         </li>

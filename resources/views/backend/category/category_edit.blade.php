@@ -1,7 +1,8 @@
 @extends('admin.admin_master')
 
 @section('admin_content')
-    <div class="container mt-2">
+<div class="row d-flex justify-content-center align-items-center">
+    <div class="col-lg-8 col-lg-offset-4 p-1">
         <div class="card">
             <div class="card-header">
                 <h4>category Edit</h4>
@@ -79,4 +80,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

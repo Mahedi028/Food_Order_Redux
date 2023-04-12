@@ -41,7 +41,9 @@
 
 
 		<!--start page wrapper -->
-        @yield('admin_content')
+        <div class="page-wrapper">
+            @yield('admin_content')
+        </div>
 
 
 		<!--end page wrapper -->
