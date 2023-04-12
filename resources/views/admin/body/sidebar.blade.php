@@ -82,9 +82,9 @@
                 <div class="menu-title">Menus</div>
             </a>
             <ul>
-                <li> <a href="component-alerts.html"><i class="bx bx-right-arrow-alt"></i>Add</a>
+                <li> <a href="{{route('menu.add')}}"><i class="bx bx-right-arrow-alt"></i>Add</a>
                 </li>
-                <li> <a href="component-accordions.html"><i class="bx bx-right-arrow-alt"></i>View</a>
+                <li> <a href="{{route('menu.all')}}"><i class="bx bx-right-arrow-alt"></i>View</a>
                 </li>
             </ul>
         </li>

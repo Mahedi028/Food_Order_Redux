@@ -10,11 +10,16 @@
 	<!--plugins-->
 	<link href="{{asset('backend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
 	<link href="{{asset('backend/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
+	<link href="{{asset('backend/assets/plugins/input-tags/css/tagsinput.css')}}" rel="stylesheet" />
+	<link href="{{asset('backend/assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('backend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
 	<link href="{{asset('backend/assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
-	<!-- loader-->
+    <link rel="stylesheet" href={{asset('backend/assets/css/vendors_css.css')}}>
+
+    <!-- loader-->
 	<link href="{{asset('backend/assets/css/pace.min.css')}}" rel="stylesheet" />
 	<script src="{{asset('backend/assets/js/pace.min.js')}}"></script>
+
 	<!-- Bootstrap CSS -->
 	<link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet">
 	<link href="{{asset('backend/assets/css/app.css')}}" rel="stylesheet">
@@ -58,7 +63,7 @@
 	</div>
 	<!--end wrapper-->
 	<!--start switcher-->
-	<div class="switcher-wrapper">
+	{{-- <div class="switcher-wrapper">
 		<div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
 		</div>
 		<div class="switcher-body">
@@ -153,7 +158,7 @@
 			</div>
 
 		</div>
-	</div>
+	</div> --}}
 	<!--end switcher-->
 	<!-- Bootstrap JS -->
 	<script src="{{asset('backend/assets/js/bootstrap.bundle.min.js')}}"></script>
@@ -169,6 +174,8 @@
 	<script src="{{asset('backend/assets/plugins/sparkline-charts/jquery.sparkline.min.js')}}"></script>
 	<script src="{{asset('backend/assets/plugins/jquery-knob/excanvas.js')}}"></script>
 	<script src="{{asset('backend/assets/plugins/jquery-knob/jquery.knob.js')}}"></script>
+    <script src="{{asset('backend/assets/vendor_plugins/select2/js/select2.min.js')}}"></script>
+
 	  <script>
 		  $(function() {
 			  $(".knob").knob();
@@ -177,6 +184,9 @@
 	  <script src="{{asset('backend/assets/js/index.js')}}"></script>
 	<!--app JS-->
 	<script src="{{asset('backend/assets/js/app.js')}}"></script>
+    <script src="{{ asset('backend/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
+
+
 </body>
 
 </html>
