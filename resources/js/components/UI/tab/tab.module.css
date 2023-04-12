@@ -67,9 +67,13 @@
   }
 
   .content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     font-size: 16px;
     line-height: 1.5;
     color: black;
+    padding: 20px 20px;
   }
 
   .cate__image{
@@ -77,3 +81,19 @@
     height: 100px;
     object-fit: cover;
   }
+
+
+  @media only screen and (max-width: 600px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 16px;
+        line-height: 1.5;
+        color: black;
+        padding: 20px 20px;
+      }
+
+}

@@ -1,11 +1,16 @@
-import { Fragment } from 'react'
-import React, { useState } from 'react'
+import React, { useState,Fragment, useEffect} from 'react'
 import classes from './detailstab.module.css'
 import burger from '../../assets/categories/burger.png'
 import pizza from '../../assets/menus/pizza/pizza-01.jpg'
 import FormInput from '../UI/forminput/FormInput'
 
-const DetailsTab = () => {
+const DetailsTab = (props) => {
+
+    const description=props.description
+
+    useEffect(() => {
+
+    }, [props.description])
 
     const [activeTab, setActiveTab]=useState(1)
 
@@ -36,7 +41,7 @@ const DetailsTab = () => {
         {activeTab === 1 && <div className={classes.tab_content}>
             <div className={classes.menu__description}>
                 <h4>Description</h4>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus repudiandae eos illum minus incidunt exercitationem, quo mollitia ducimus neque inventore earum, voluptatibus libero, vero aliquid natus. Tempore impedit voluptas cumque.</p>
+                <p>{description}</p>
             </div>
         </div>}
         {activeTab === 2 && <div className={classes.tab_content}>

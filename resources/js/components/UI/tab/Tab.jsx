@@ -1,9 +1,12 @@
-
 import React, { useState } from 'react';
 import classes from './tab.module.css';
 import img1 from '../../../assets/categories/burger.png'
+import { useSelector } from 'react-redux';
 import MenuCard from '../../menu/MenuCard';
 function CustomTab({ title, active, onClick, children, img }) {
+
+
+
   return (
     <div
       className={`tab ${active ? 'active' : ''}`}
@@ -22,51 +25,46 @@ function CustomTab({ title, active, onClick, children, img }) {
 }
 
 function Tab() {
-  const [activeTab, setActiveTab] = useState(1);
 
-  const tabs = [
-    {
-      id: 1,
-      img:img1,
-      title: 'burger',
-      content: <MenuCard/>,
-    },
-    {
-      id: 2,
-      img:img1,
-      title: 'Tab 2',
-      content: <MenuCard/>,
-    },
-    {
-      id: 3,
-      img:img1,
-      title: 'Tab 3',
-      content: <p>Content for Tab 3</p>,
-    },
-  ];
+    const categories=useSelector((state)=>state.category.categories)
+
+
+
+
+
+
+    const [activeTab, setActiveTab] = useState(1);
+
 
   return (
     <div className={classes.tab__container}>
       <div className={classes.tab__list}>
-        {tabs.map((tab) => (
+
+      {/* tab header */}
+        {categories.map((category) => (
           <CustomTab
-            key={tab.id}
-            title={tab.title}
-            img={tab.img}
-            active={activeTab === tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            key={parseInt(category.id)}
+            title={category.name}
+            img={category.category_thumbnail}
+            active={activeTab === parseInt(category.id)}
+            onClick={() => setActiveTab(parseInt(category.id))}
           />
         ))}
       </div>
+
+      {/* tab content  */}
       <div className={classes.tab__content}>
-        {tabs.map(
-          (tab) =>
-            activeTab === tab.id && (
-              <div key={tab.id} className={classes.content}>
-                {tab.content}
+        {
+            categories.map((category) =>  { return (
+            activeTab === parseInt(category.id) && (
+              <div key={parseInt(category.id)} className={classes.content}>
+              {
+                category?.menus?.map((menu)=><MenuCard menu={menu}/>)
+              }
               </div>
             )
-        )}
+          )})
+        }
       </div>
     </div>
   );

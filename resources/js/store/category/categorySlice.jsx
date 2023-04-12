@@ -27,8 +27,8 @@ const categorySlice=createSlice({
             state.loading=true
         },
         [fetchMenuListByCategory.fulfilled]:(state,action)=>{
-            console.log("[state]",state.user);
-            console.log("[action]",action);
+            // console.log("[state]",state.user);
+            // console.log("[action]",action);
             state.loading=false,
             state.categories=action.payload
         },

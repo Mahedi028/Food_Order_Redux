@@ -45,3 +45,17 @@
     color: #eee;
 
 }
+
+@media only screen and (max-width: 600px) {
+    .menu__card__container{
+        width: 300px;
+        height: 410px;
+        background-color: #eee;
+        box-shadow: 3px 3px 3px  rgba(0,0,0,0.5);
+        border-radius: 10px;
+        border: none;
+        margin-bottom: 20px;
+    }
+
+}
+

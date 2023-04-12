@@ -4,7 +4,6 @@ import AppUrl from "../../api/AppUrl";
 
 
 export const fetchCategory=createAsyncThunk("category/fetchCategory",async(rejectedWithValue)=>{
-
     try{
         //define url
     const url=AppUrl.GetCategories
