@@ -2,6 +2,7 @@ import React from 'react'
 import classes from './navbar.module.css'
 import {BsCartFill} from 'react-icons/bs'
 import { Link } from 'react-router-dom'
+import CartButton from '../button/cartbutton/CartButton'
 const NavBar = () => {
   return (
     <nav>
@@ -28,7 +29,10 @@ const NavBar = () => {
         <ul className={classes.nav__menu__right}>
             <li className={classes.nav__menu__item}>
                 <Link to='/cart' className={classes.nav__link}>
-                    <BsCartFill className={classes.nav__menu__icon}/>
+                    <CartButton className='d-flex justify-content-center align-items-center'>
+                        <BsCartFill className={classes.nav__menu__icon}></BsCartFill>
+                        <h4><sup>3</sup></h4>
+                    </CartButton>
                 </Link>
             </li>
             <li className={classes.nav__menu__item}>

@@ -43,10 +43,11 @@ nav{
 }
 
 .nav__link{
-    
+
 }
 
 .nav__menu__icon{
     font-size: 22px;
+    margin-right: 5px;
 }
 
