@@ -7,6 +7,7 @@ import {AiFillDelete} from 'react-icons/ai'
 import FormSelect from '../UI/formselect/FormSelect'
 import {SelectOptions} from '../UI/formselect/FormSelect'
 import FormInput from '../UI/forminput/FormInput'
+import { Link } from 'react-router-dom'
 const Cart = () => {
   return (
     <Fragment>
@@ -98,7 +99,9 @@ const Cart = () => {
                 </div>
                 <hr/>
                 <div className="d-flex justify-content-center">
-                    <CartButton>PROCEED TO CHECKOUT</CartButton>
+                    <Link to='/checkout'>
+                        <CartButton>PROCEED TO CHECKOUT</CartButton>
+                    </Link>
                 </div>
                 </Col>
             </Row>
