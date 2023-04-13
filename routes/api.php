@@ -135,7 +135,5 @@ Route::prefix('v1')->group(function(){
        Route::post('/sslcommerce/order',[SslCommerzPaymentController::class,'SSLCommercePayment']);
        //-----------------------SSL-Commerce--------------------------------------//
 
-
-
 });
 

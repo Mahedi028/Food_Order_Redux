@@ -1,14 +1,30 @@
 import cogoToast from 'cogo-toast'
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import SignUpWithGoogle from '../../UI/button/sociallogin/SignUpWithGoogle'
 import SubmitButton from '../../UI/button/submitbutton/SubmitButton'
 import FormInput from '../../UI/forminput/FormInput'
 import classes from './registerform.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { registerUser } from '../../../store/auth/authActions'
 const RegisterForm = () => {
 
+    const dispatch=useDispatch()
+    const navigate=useNavigate()
+
+    const {loading,user,token,error,success,message}=useSelector((state)=>state.auth)
+
+    useEffect(() => {
+        //redirect successful if user registered successful
+        if(success){
+            cogoToast.success(message)
+            return navigate('/login')
+        }
+    }, [success])
+
+    //define all states
     const [values, setValues]=useState({
-        username:"",
+        name:"",
         email:"",
         password:"",
         password_confirmation:"",
@@ -21,7 +37,7 @@ const RegisterForm = () => {
         {
             id:1,
             type:"text",
-            name:"username",
+            name:"name",
             placeholder:"Enter Username",
             label:"Username",
             // errorMessage:"Username should be 3-16 characters and shouldn't include any special character",
@@ -82,16 +98,16 @@ const RegisterForm = () => {
     //validation rules
     const validate=(values)=>{
         const errors={};
-        const usernameRegex= /^[A-Za-z0-9]{3,16}$/;
+        const nameRegex= /^[A-Za-z0-9]{3,16}$/;
         const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
         const passwordRegex= /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-        if(!values.username){
-            errors.username="Username is required";
+        if(!values.name){
+            errors.name="Username is required";
             cogoToast.warn( errors.username)
-        }else if(!usernameRegex.test(values.username)){
-            errors.username="Username should be 3-16 characters and shouldn't include any special character"
+        }else if(!nameRegex.test(values.username)){
+            errors.name="Username should be 3-16 characters and shouldn't include any special character"
             cogoToast.warn( errors.username)
         }
         if(!values.email){
@@ -147,42 +163,46 @@ const RegisterForm = () => {
             return
         }else{
             //if no errors occur then input values submit in the backend
-            const{username,email,password,password_confirmation,phone_number}=values
+            // const{username,email,password,password_confirmation,phone_number}=values
+
+            //dispatch action
+            dispatch(registerUser(values))
+
 
             //create an instance FormData
-            const formData=new FormData()
+            // const formData=new FormData()
 
             //send input value in the backend
-            formData.append("name",username)
-            formData.append("email",email)
-            formData.append("password",password)
-            formData.append("password_confirmation",password_confirmation)
-            formData.append("phone_number",phone_number)
+            // formData.append("name",username)
+            // formData.append("email",email)
+            // formData.append("password",password)
+            // formData.append("password_confirmation",password_confirmation)
+            // formData.append("phone_number",phone_number)
 
             //change submit button value
-            sendBtn.innerHTML="Submitting....."
+            // sendBtn.innerHTML="Submitting....."
 
             //console
-            console.log("Form Data");
-            for (let obj of formData) {
-                console.log(obj);
-            }
+
+            // console.log("Form Data");
+            // for (let obj of formData) {
+            //     console.log(obj);
+            // }
             //configure api url and axios
 
 
             //reset form
             setValues({
-                username:"",
+                name:"",
                 email:"",
                 password:"",
                 password_confirmation:"",
                 phone_number:""
             })
+
+            sendBtn.innerHTML="send"
+
         }
-
-
-
-
     }
 
 

@@ -6,6 +6,11 @@ import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import store from './app/store.jsx';
+import axios from 'axios';
+
+//get api-token
+axios.defaults.headers.common['Authorization']='Bearer '+localStorage.getItem('token')
+// axios.defaults.headers.common["Content-Type"]="application/json";
 
 
 
