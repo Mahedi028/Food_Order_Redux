@@ -1,17 +1,17 @@
-import React from 'react'
-import { Fragment } from 'react'
+import React, { Fragment,useEffect }from 'react'
 import {Col, Row} from 'react-bootstrap'
 import classes from './menudetails.module.css'
-import img from '../../assets/menus/Burgers/burger-06.jpg'
 import FormSelect, { SelectOptions } from '../UI/formselect/FormSelect'
 import CartButton from '../UI/button/cartbutton/CartButton'
 import CartItem from '../cart/CartItem'
-import { useEffect } from 'react'
+import Bedge from '../UI/bedge/Bedge'
 const MenuDetails = (props) => {
 
-    // console.log("[menu-details]",props.menuDetails)
-
     const{title,discount_price,price,meal_thumbnail,meal_img1,meal_img2,meal_img3,active,in_stock,ingredients,dietary_info}=props.menuDetails
+
+    const allIngredients= typeof ingredients === 'string' ? ingredients.split(",") : '';
+    const allDietaryInfos= typeof dietary_info === 'string' ? dietary_info.split(",") : '';
+
 
     useEffect(() => {
 
@@ -57,13 +57,27 @@ const MenuDetails = (props) => {
                         <h2 className='text-center mt-3'>{title}</h2>
                         <h6 className='text-center mt-3'>Price ${price}</h6>
                     </div>
-                    <div className=''>
+                    <div className='d-flex flex-column'>
                         <FormSelect>
                             <SelectOptions value="1" option_name="1"/>
                             <SelectOptions value="2" option_name="2"/>
                             <SelectOptions value="3" option_name="3"/>
                         </FormSelect>
                         <CartButton>ADD TO CART</CartButton>
+                    </div>
+                    <hr/>
+                    <div className="mt-2">
+                        <h4>Ingredients</h4>
+                       {
+                        allIngredients && allIngredients.length > 0 ?
+                        allIngredients.map(text=><Bedge text={text} backgroundColor="crimson" color="white"/>):null
+                       }
+                       <hr/>
+                       <h4>Dietary Info</h4>
+                       {
+                        allDietaryInfos && allDietaryInfos.length > 0 ?
+                        allDietaryInfos.map(text=><Bedge text={text} backgroundColor="crimson" color="white"/>):null
+                       }
                     </div>
                 </Col>
                 <Col lg={4} md={4} sm={12}>
