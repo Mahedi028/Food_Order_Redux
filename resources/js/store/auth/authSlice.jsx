@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { registerUser,loginUser } from "./authActions"
+import { registerUser,loginUser, forgetPassword, resetPassword } from "./authActions"
 
 
 //define state
@@ -7,7 +7,7 @@ const initialState={
     activeAccountStatus:false,
     isLoggedIn:false,
     loading:false,
-    user:null,
+    user:{},
     token:null,
     error:null,
     success:null,
@@ -50,6 +50,36 @@ const authSlice=createSlice({
             state.pageRefreshStatus=true
         },
         [loginUser.rejected]:(state,action)=>{
+            state.loading=true,
+            state.error=action.payload
+        },
+        [forgetPassword.pending]:(state,action)=>{
+            state.loading=true
+        },
+        [forgetPassword.fulfilled]:(state,action)=>{
+            console.log("[forget-action]",action.payload)
+            state.loading=false,
+            state.message=action.payload.message,
+            state.error=null,
+            state.success=action.payload.statusCode,
+            state.pageRefreshStatus=true
+        },
+        [forgetPassword.rejected]:(state,action)=>{
+            state.loading=true,
+            state.error=action.payload
+        },
+        [resetPassword.pending]:(state,action)=>{
+            state.loading=true
+        },
+        [resetPassword.fulfilled]:(state,action)=>{
+            console.log("[forget-action]",action.payload)
+            state.loading=false,
+            state.message=action.payload.message,
+            state.error=null,
+            state.success=action.payload.statusCode,
+            state.pageRefreshStatus=true
+        },
+        [resetPassword.rejected]:(state,action)=>{
             state.loading=true,
             state.error=action.payload
         },

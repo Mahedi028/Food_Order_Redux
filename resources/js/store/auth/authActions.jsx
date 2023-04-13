@@ -49,7 +49,7 @@ async({
         if(response.status===200){
             return response.data
         }
-        
+
 
     }catch(error){
         // return custom error message from API if any
@@ -97,6 +97,97 @@ async({
             return response.data
         }
 
+    }catch(error){
+        // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message)
+      } else {
+        return rejectWithValue(error.message)
+      }
+    }
+})
+
+
+export const forgetPassword=createAsyncThunk("auth/forgetPassword",
+async({
+    email,
+},{rejectWithValue})=>{
+
+    //define data
+    const formData=new FormData()
+
+    formData.append("email",email)
+
+    //console
+    console.log("Form Data");
+    for (let obj of formData) {
+        console.log(obj);
+    }
+    //define config
+    const config={
+        // Headers:{'Content-type':'multipart/form-data'}
+        Headers:{
+            'Content-type':'application/json',
+            'Accept':'application/json'
+        }
+    }
+    try{
+        //define url
+        const url=AppUrl.PostForgetPassword
+        console.log(url)
+        const response=await axios.post(url,formData,config)
+
+        if(response.status===200){
+            return response.data
+        }
+    }catch(error){
+        // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message)
+      } else {
+        return rejectWithValue(error.message)
+      }
+    }
+})
+
+
+
+export const resetPassword=createAsyncThunk("auth/resetPassword",
+async({
+    token,
+    password,
+    password_confirmation
+},{rejectWithValue})=>{
+
+    //define data
+    const formData=new FormData()
+
+    formData.append("token",token)
+    formData.append("password",password)
+    formData.append("password_confirmation",password_confirmation)
+
+    //console
+    console.log("Form Data");
+    for (let obj of formData) {
+        console.log(obj);
+    }
+    //define config
+    const config={
+        // Headers:{'Content-type':'multipart/form-data'}
+        Headers:{
+            'Content-type':'application/json',
+            'Accept':'application/json'
+        }
+    }
+    try{
+        //define url
+        const url=AppUrl.resetPassword
+        console.log(url)
+        const response=await axios.post(url,formData,config)
+
+        if(response.status===200){
+            return response.data
+        }
     }catch(error){
         // return custom error message from API if any
       if (error.response && error.response.data.message) {

@@ -2,9 +2,19 @@ import React, { useState, useEffect} from 'react'
 import classes from './loginform.module.css'
 import FormInput from '../../UI/forminput/FormInput'
 import SubmitButton from '../../UI/button/submitbutton/SubmitButton'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser } from '../../../store/auth/authActions'
 
 const LoginForm = () => {
+
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
+
+    const {isLoggedIn,token}=useSelector((state)=>state.auth);
+
+
+
     const [values, setValues]=useState({
         email:"",
         password:"",
@@ -94,64 +104,76 @@ const LoginForm = () => {
         if(!isObjectEmpty(errors)){
             return
         }else{
-            const{email,password}=values
+            // const{email,password}=values
+
+            //dispatch action
+            dispatch(loginUser(values))
 
             //create an instance FormData
-            const formData=new FormData()
+            // const formData=new FormData()
 
             //send input value in the backend
-            formData.append("email",email)
-            formData.append("password",password)
+            // formData.append("email",email)
+            // formData.append("password",password)
 
 
             //change submit button value
             sendBtn.innerHTML="Submitting....."
 
             //console
-            console.log("Form Data");
-            for (let obj of formData) {
-                console.log(obj);
-            }
+            // console.log("Form Data");
+            // for (let obj of formData) {
+            //     console.log(obj);
+            // }
 
             //configure api url and axios
+
+            //reset form
+            setValues({
+                email:"",
+                password:"",
+            })
+
+            sendBtn.innerHTML="send"
         }
-
-
-
 
     }
 
 
+    if(isLoggedIn===true &&localStorage.getItem("token")){
+        return navigate('/profile')
+    }else{
+        return (
+            <div className={classes.form__container}>
+                <div className="form_errors">
+                    <h5 className='text-center'>Login</h5>
+                </div>
+                <form onSubmit={handleSubmit} className={classes.register__form}>
+                {
+                    inputs.map((input)=>{
+                        return <FormInput
+                                    key={input.id}
+                                    {...input}
+                                    value={values[input.name]}
+                                    className="mb-2"
+                                    onChange={handleInputChange}
+                                />
+                    })
+                }
+                <SubmitButton
+                    type="submit"
+                    id="sendBtn"
+                >login</SubmitButton>
+                </form>
+                <div className="d-flex flex-column justify-content-center align-items-center mb-2">
+                    <Link to='/register' className='mb-2'>Do not have an account?</Link>
+                    <Link to='/forgetpassword' >forget password?</Link>
+                </div>
+            </div>
+          )
 
+    }
 
-  return (
-    <div className={classes.form__container}>
-        <div className="form_errors">
-            <h5 className='text-center'>Login</h5>
-        </div>
-        <form onSubmit={handleSubmit} className={classes.register__form}>
-        {
-            inputs.map((input)=>{
-                return <FormInput
-                            key={input.id}
-                            {...input}
-                            value={values[input.name]}
-                            className="mb-2"
-                            onChange={handleInputChange}
-                        />
-            })
-        }
-        <SubmitButton
-            type="submit"
-            id="sendBtn"
-        >login</SubmitButton>
-        </form>
-        <div className="d-flex flex-column justify-content-center align-items-center mb-2">
-            <Link to='/register' className='mb-2'>Do not have an account?</Link>
-            <Link to='/forgetpassword' >forget password?</Link>
-        </div>
-    </div>
-  )
 }
 
 export default LoginForm

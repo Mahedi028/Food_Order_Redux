@@ -1,9 +1,21 @@
-import React, { Fragment, useState} from 'react'
+import React, { Fragment, useState, useEffect} from 'react'
 import FormInput from '../UI/forminput/FormInput'
 import classes from './profile.module.css'
 import SubmitButton from '../UI/button/submitbutton/SubmitButton'
 import cogoToast from 'cogo-toast'
-const ProfileEdit = () => {
+import { useDispatch,useSelector } from 'react-redux'
+import { fetchUser } from '../../store/user/userActions'
+const ProfileEdit = (props) => {
+
+    const user=useSelector((state)=>state.user.userData || {})
+
+    const dispatch=useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchUser())
+    }, [dispatch])
+
+
 
     const [values, setValues]=useState({
         username:"",
@@ -20,7 +32,7 @@ const ProfileEdit = () => {
         {
             id:1,
             type:"text",
-            name:"username",
+            name:"name",
             placeholder:"Enter Username",
             label:"Username",
             // errorMessage:"Username should be 3-16 characters and shouldn't include any special character",
@@ -59,15 +71,15 @@ const ProfileEdit = () => {
      //validation rules
      const validate=(values)=>{
         const errors={};
-        const usernameRegex= /^[A-Za-z0-9]{3,16}$/;
+        const nameRegex= /^[A-Za-z0-9]{3,16}$/;
         const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
-        if(!values.username){
-            errors.username="Username is required";
-            cogoToast.warn( errors.username)
-        }else if(!usernameRegex.test(values.username)){
-            errors.username="Username should be 3-16 characters and shouldn't include any special character"
-            cogoToast.warn( errors.username)
+        if(!values.name){
+            errors.name="Username is required";
+            cogoToast.warn( errors.name)
+        }else if(!nameRegex.test(values.name)){
+            errors.name="Username should be 3-16 characters and shouldn't include any special character"
+            cogoToast.warn( errors.name)
         }
         if(!values.email){
             errors.email="Email is required";
@@ -150,7 +162,7 @@ const ProfileEdit = () => {
                 return <FormInput
                             key={input.id}
                             {...input}
-                            value={values[input.name]}
+                            value={user?user[input.name]:values[input.name]}
                             className="mb-2"
                             onChange={handleInputChange}
                         />

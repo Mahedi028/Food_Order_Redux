@@ -17,6 +17,8 @@ use App\Http\Controllers\Api\StripePaymentController;
 use App\Http\Controllers\Api\Auth\SocialLoginController;
 use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\ForgetPasswordController;
+use App\Http\Controllers\Api\User\ProfileController;
+use App\Http\Controllers\Api\User\UserOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,9 +57,14 @@ Route::prefix('v1')->group(function(){
 
     //-------------------protected route-------------------------------------//
 
-    Route::controller(UserController::class)->middleware('auth:sanctum')->group(function(){
+    Route::controller(ProfileController::class)->middleware('auth:api')->group(function(){
         //authenticate user
         Route::get('/user','Profile');
+
+    });
+
+    Route::controller(UserOrderController::class)->middleware('auth:api')->group(function(){
+        //authenticate user
         Route::get('/{user_id}/orders','UserOrder');
         Route::get('/{order_id}/order_details','OrderDetails');
         Route::get('/{order_id}/invoice_download','InvoiceDownload');

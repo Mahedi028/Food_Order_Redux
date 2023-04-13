@@ -3,8 +3,15 @@ import classes from './forgetpassword.module.css'
 import FormInput from '../../UI/forminput/FormInput'
 import SubmitButton from '../../UI/button/submitbutton/SubmitButton'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { forgetPassword } from '../../../store/auth/authActions'
 
 const ForgetPassword = () => {
+
+    const dispatch=useDispatch()
+
+
+
     const [values, setValues]=useState({
         email:"",
     })
@@ -71,24 +78,36 @@ const ForgetPassword = () => {
         if(!isObjectEmpty(errors)){
             return
         }else{
-            const{email}=values
+
+            // dispatch action
+            dispatch(forgetPassword(values))
+
+            // const{email}=values
 
             //create an instance FormData
-            const formData=new FormData()
+            // const formData=new FormData()
 
             //send input value in the backend
-            formData.append("email",email)
+            // formData.append("email",email)
 
             //change submit button value
             sendBtn.innerHTML="Submitting....."
 
             //console
-            console.log("Form Data");
-            for (let obj of formData) {
-                console.log(obj);
-            }
+            // console.log("Form Data");
+            // for (let obj of formData) {
+            //     console.log(obj);
+            // }
 
             //configure api url and axios
+
+            //resetform
+            setValues({
+                email:"",
+
+            })
+
+            sendBtn.innerHTML="Send"
         }
 
 

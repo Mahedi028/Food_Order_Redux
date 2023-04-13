@@ -1,10 +1,16 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect} from 'react'
 import NavBar from '../UI/navbar/NavBar'
 
-const Header = () => {
+const Header = (props) => {
+    const user=props.user
+
+    useEffect(() => {
+
+    }, [props.user])
+
   return (
     <Fragment>
-        <NavBar/>
+        <NavBar user={user}/>
     </Fragment>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment, useEffect} from 'react'
 import classes from './profile.module.css'
 import { Col, Row} from 'react-bootstrap'
 import user from '../../assets/logo/088.jpg'
@@ -7,10 +7,28 @@ import { Routes, Route, Link} from 'react-router-dom'
 import EditProfilePage from '../../pages/user/EditProfilePage'
 import ChangePasswordPage from '../../pages/user/ChangePasswordPage'
 import UserOrderPage from '../../pages/user/UserOrderPage'
+import { useSelector } from 'react-redux'
+const Profile = (props) => {
 
-const Profile = () => {
+    const {id, name, email, phone_number}=props.user
+
+    const {pageRefreshStatus}=useSelector((state)=>state.auth)
+
+    useEffect(() => {
+
+    }, [props.user])
+
+    const PageRefresh=()=>{
+        if(pageRefreshStatus===true){
+            let refresh=window.location.reload()
+            return refresh
+        }
+    }
+
+
   return (
-    <div className={classes.profile__container}>
+    <Fragment>
+        <div className={classes.profile__container}>
         <Row>
             <Col lg={3} md={3} sm={12}>
                 <div className={classes.user__details}>
@@ -31,6 +49,7 @@ const Profile = () => {
             </Col>
             <Col lg={9} md={9} sm={12}>
             <div className={classes.user__details__content}>
+                <h2>Welcome {name} to our food order app</h2>
                 {
                     <Routes>
                         <Route path='/edit' element={<EditProfilePage/>}/>
@@ -38,11 +57,14 @@ const Profile = () => {
                         <Route path='/user/orders' element={<UserOrderPage/>}/>
                     </Routes>
                 }
-                
+
             </div>
             </Col>
         </Row>
-    </div>
+        </div>
+        {PageRefresh()}
+    </Fragment>
+
   )
 }
 
