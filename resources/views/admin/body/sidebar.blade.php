@@ -114,68 +114,53 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-label">User Section</li>
+        <li class="menu-label">Shipping Area</li>
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-message-square-edit'></i>
                 </div>
-                <div class="menu-title">Forms</div>
+                <div class="menu-title">Division</div>
             </a>
             <ul>
-                <li> <a href="form-elements.html"><i class="bx bx-right-arrow-alt"></i>Form Elements</a>
+                <li> <a href="{{route('division.add')}}"><i class="bx bx-right-arrow-alt"></i>Add</a>
                 </li>
-                <li> <a href="form-input-group.html"><i class="bx bx-right-arrow-alt"></i>Input Groups</a>
-                </li>
-                <li> <a href="form-layouts.html"><i class="bx bx-right-arrow-alt"></i>Forms Layouts</a>
-                </li>
-                <li> <a href="form-validations.html"><i class="bx bx-right-arrow-alt"></i>Form Validation</a>
-                </li>
-                <li> <a href="form-wizard.html"><i class="bx bx-right-arrow-alt"></i>Form Wizard</a>
-                </li>
-                <li> <a href="form-text-editor.html"><i class="bx bx-right-arrow-alt"></i>Text Editor</a>
-                </li>
-                <li> <a href="form-file-upload.html"><i class="bx bx-right-arrow-alt"></i>File Upload</a>
-                </li>
-                <li> <a href="form-date-time-pickes.html"><i class="bx bx-right-arrow-alt"></i>Date Pickers</a>
-                </li>
-                <li> <a href="form-select2.html"><i class="bx bx-right-arrow-alt"></i>Select2</a>
+                <li> <a href="{{route('division.all')}}"><i class="bx bx-right-arrow-alt"></i>View</a>
                 </li>
             </ul>
-        </li>
-        <li>
             <a class="has-arrow" href="javascript:;">
-                <div class="parent-icon"><i class="bx bx-grid-alt"></i>
+                <div class="parent-icon"><i class='bx bx-message-square-edit'></i>
                 </div>
-                <div class="menu-title">Tables</div>
+                <div class="menu-title">District</div>
             </a>
             <ul>
-                <li> <a href="table-basic-table.html"><i class="bx bx-right-arrow-alt"></i>Basic Table</a>
+                <li> <a href="{{route('district.add')}}"><i class="bx bx-right-arrow-alt"></i>Add</a>
                 </li>
-                <li> <a href="table-datatable.html"><i class="bx bx-right-arrow-alt"></i>Data Table</a>
+                <li> <a href="{{route('district.all')}}"><i class="bx bx-right-arrow-alt"></i>View</a>
+                </li>
+            </ul>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class='bx bx-message-square-edit'></i>
+                </div>
+                <div class="menu-title">State</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('state.add')}}"><i class="bx bx-right-arrow-alt"></i>Add</a>
+                </li>
+                <li> <a href="{{route('state.all')}}"><i class="bx bx-right-arrow-alt"></i>View</a>
                 </li>
             </ul>
         </li>
-        <li class="menu-label">Pages</li>
+        <li class="menu-label">User Section</li>
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class="bx bx-lock"></i>
                 </div>
-                <div class="menu-title">Authentication</div>
+                <div class="menu-title">Coupon</div>
             </a>
             <ul>
-                <li> <a href="authentication-signin.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Sign In</a>
+                <li> <a href="{{route('coupon.add')}}" target="_blank"><i class="bx bx-right-arrow-alt"></i>Add</a>
                 </li>
-                <li> <a href="authentication-signup.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Sign Up</a>
-                </li>
-                <li> <a href="authentication-signin-with-header-footer.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Sign In with Header & Footer</a>
-                </li>
-                <li> <a href="authentication-signup-with-header-footer.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Sign Up with Header & Footer</a>
-                </li>
-                <li> <a href="authentication-forgot-password.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Forgot Password</a>
-                </li>
-                <li> <a href="authentication-reset-password.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Reset Password</a>
-                </li>
-                <li> <a href="authentication-lock-screen.html" target="_blank"><i class="bx bx-right-arrow-alt"></i>Lock Screen</a>
+                <li> <a href="{{route('coupon.all')}}" target="_blank"><i class="bx bx-right-arrow-alt"></i>View</a>
                 </li>
             </ul>
         </li>

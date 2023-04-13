@@ -1,4 +1,4 @@
-import React, { Fragment, useState} from 'react'
+import React, { Fragment, useState, useEffect} from 'react'
 import classes from './checkout.module.css'
 import {Col, Row} from 'react-bootstrap'
 import FormInput from '../UI/forminput/FormInput'
@@ -7,21 +7,26 @@ import FormSelect, { SelectOptions } from '../UI/formselect/FormSelect'
 import FormTextArea from '../UI/textarea/FormTextArea'
 import CartButton from '../UI/button/cartbutton/CartButton'
 import CartItem from '../cart/CartItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import bkash from '../../assets/payment/bkash.png'
 import stripe from '../../assets/payment/stripe.png'
 import paypal from '../../assets/payment/paypal.svg'
 import sslcommerz from '../../assets/payment/SSLCOMMERZ.png'
+import { fetchAllDistricts, fetchAllDivision, fetchAllStates } from '../../store/checkout/checkoutActions'
 const CheckoutForm = () => {
 
+
+    //define all states
     const [values, setValues]=useState({
         name:"",
         email:"",
         phone:"",
         address:"",
         post_code:"",
-        state_id:"",
-        district_id:"",
-        state_id:"",
+        division_id:1,
+        district_id:1,
+        state_id:1,
         payment_method:""
     })
 
@@ -74,43 +79,20 @@ const CheckoutForm = () => {
         },
     ]
 
-    const divisions=[
-        {
-            id:1,
-            name:"Dhaka"
-        },
-        {
-            id:2,
-            name:"Khulna"
-        },
-        {
-            id:3,
-            name:"Rajshahi"
-        },
-        {
-            id:4,
-            name:"Rangpur"
-        },
-    ]
 
-    const districts=[
-        {
-            id:1,
-            name:"Dhaka"
-        },
-        {
-            id:2,
-            name:"Faridpur"
-        },
-        {
-            id:3,
-            name:"Gopalgonj"
-        },
-        {
-            id:4,
-            name:"Rajbari"
-        },
-    ]
+    const districts=useSelector((state)=>state.checkout.districts)
+    const states=useSelector((state)=>state.checkout.states)
+    const divisions=useSelector((state)=>state.checkout.divisions)
+
+    const dispatch=useDispatch()
+    const navigate=useNavigate()
+
+    useEffect(() => {
+        dispatch(fetchAllDivision())
+        dispatch(fetchAllDistricts({division_id:values.division_id}))
+        dispatch(fetchAllStates({district_id:values.district_id}))
+    }, [values.division_id,values.district_id])
+
 
     const handleInputChange=(e,option)=>{
 
@@ -345,8 +327,8 @@ const CheckoutForm = () => {
                                     errorMessage={validationErrors.district}
                                 >
                                     {
-                                        districts.map((district)=>{
-                                            return <SelectOptions value={district.id} option_name={district.name}/>
+                                        states.map((state)=>{
+                                            return <SelectOptions value={state.id} option_name={state.name}/>
                                         })
                                     }
                                 </FormSelect>
