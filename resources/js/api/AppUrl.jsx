@@ -17,6 +17,15 @@ export default class AppUrl{
     static LoginUserData=this.baseUrl+"/user";
     static PostForgetPassword=this.baseUrl+"/forgetpassword";
     static PostResetPassword=this.baseUrl+"/resetpassword";
+
+    static ProviderLoginRedirect(provider){
+        return this.baseUrl+"/login/"+provider+"/redirect";
+    }
+    static ProviderLoginCallback(provider){
+        return this.baseUrl+"/login/"+provider+"/callback";
+    }
+
+
     static GoogleLogin=this.baseUrl+"/login/google";
     static GoogleCallback=this.baseUrl+"/login/google/callback"
     static GetAllOrderFromUser(user_id){

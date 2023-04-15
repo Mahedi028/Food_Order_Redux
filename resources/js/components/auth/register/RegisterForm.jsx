@@ -6,13 +6,13 @@ import SubmitButton from '../../UI/button/submitbutton/SubmitButton'
 import FormInput from '../../UI/forminput/FormInput'
 import classes from './registerform.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { registerUser } from '../../../store/auth/authActions'
+import { googleLoginRedirect, registerUser } from '../../../store/auth/authActions'
 const RegisterForm = () => {
 
     const dispatch=useDispatch()
     const navigate=useNavigate()
 
-    const {loading,user,token,error,success,message}=useSelector((state)=>state.auth)
+    const {loading,user,token,error,success,message,googleLoginRedirectUrl}=useSelector((state)=>state.auth)
 
     useEffect(() => {
         //redirect successful if user registered successful
@@ -20,7 +20,10 @@ const RegisterForm = () => {
             cogoToast.success(message)
             return navigate('/login')
         }
-    }, [success])
+
+        dispatch(googleLoginRedirect())
+
+    }, [success,dispatch])
 
     //define all states
     const [values, setValues]=useState({
@@ -207,8 +210,21 @@ const RegisterForm = () => {
 
 
 
+
+
   return (
     <div className={classes.form__container}>
+        <div className={classes.social__login}>
+        {
+            googleLoginRedirectUrl!=null &&(
+                <a href={googleLoginRedirectUrl} className='text-decoration-none mb-2'>
+                    <SignUpWithGoogle>SIGN UP WITH GOOGLE</SignUpWithGoogle>
+                </a>
+            )
+        }
+
+        </div>
+        <hr/>
         <div className="form_errors">
             <h5 className='text-center'>Register</h5>
         </div>
@@ -231,10 +247,6 @@ const RegisterForm = () => {
         </form>
         <div className="">
             <Link to='/login' >Already have an account?</Link>
-        </div>
-        <hr/>
-        <div className={classes.social__login}>
-            <SignUpWithGoogle>SIGN UP WITH GOOGLE</SignUpWithGoogle>
         </div>
     </div>
   )

@@ -67,9 +67,14 @@ class AuthRepository implements AuthInterface
         return User::firstOrCreate($data);
     }//end of method
 
+    public function checkSocialUserEmail($email)
+    {
+        return User::where(['email' => $email])->first();
+    }
+
     public function socialUser($user_id,$provider)
     {
-        return Provider::where('provider_id',$user_id)->where('provider',$provider)->first();
+        return Provider::where('user_id',$user_id)->where('provider',$provider)->first();
     }//end of method
 
     public function findSocialUser($user_id)

@@ -51,7 +51,7 @@ Route::prefix('v1')->group(function(){
     //reset-password
     Route::post('/resetpassword', [ResetPasswordController::class,'ResetPassword']);
     //social login
-    Route::get('/login/{provider}',[SocialLoginController::class, 'redirectToProvider']);
+    Route::get('/login/{provider}/redirect',[SocialLoginController::class, 'redirectToProvider']);
     Route::get('/login/{provider}/callback',[SocialLoginController::class, 'handleProviderCallback']);
 
 

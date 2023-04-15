@@ -10,7 +10,7 @@ import UserOrderPage from '../../pages/user/UserOrderPage'
 import { useSelector } from 'react-redux'
 const Profile = (props) => {
 
-    const {id, name, email, phone_number}=props.user
+    const {id, name, email, phone_number,profile_photo_url}=props.user
 
     const {pageRefreshStatus}=useSelector((state)=>state.auth)
 
@@ -33,7 +33,7 @@ const Profile = (props) => {
             <Col lg={3} md={3} sm={12}>
                 <div className={classes.user__details}>
                     <img
-                        src={user}
+                        src={profile_photo_url?profile_photo_url:user}
                         className={classes.user__image}
                     />
                     <div className={classes.user__details__item}>

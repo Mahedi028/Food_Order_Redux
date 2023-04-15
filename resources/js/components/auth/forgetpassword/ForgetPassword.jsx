@@ -3,12 +3,16 @@ import classes from './forgetpassword.module.css'
 import FormInput from '../../UI/forminput/FormInput'
 import SubmitButton from '../../UI/button/submitbutton/SubmitButton'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import { forgetPassword } from '../../../store/auth/authActions'
+import cogoToast from 'cogo-toast'
 
 const ForgetPassword = () => {
 
     const dispatch=useDispatch()
+
+    const {message,success}=useSelector((state)=>state.auth);
+
 
 
 
@@ -113,6 +117,10 @@ const ForgetPassword = () => {
 
 
 
+    }
+
+    if(success){
+        cogoToast.success(message)
     }
 
 

@@ -11,6 +11,8 @@ import ProfilePage from '../pages/user/ProfilePage'
 import WishListPage from '../pages/user/WishListPage'
 import MenuDetailsPage from '../pages/MenuDetailsPage'
 import ActiveAccountPage from '../pages/auth/ActiveAccountPage'
+import GoogleCallback from '../pages/auth/social/GoogleCallback'
+import ProtectedRoute from './ProtectedRoute'
 
 const AppRoute = (props) => {
     const user=props.user
@@ -28,12 +30,29 @@ const AppRoute = (props) => {
             <Route path='/activeaccount/:token' element={<ActiveAccountPage/>}/>
             <Route path='/forgetpassword' element={<ForgetPasswordPage/>}/>
             <Route path='/resetpassword/:token' element={<ResetPasswordPage/>}/>
+            <Route path='/login/google/callback' element={<GoogleCallback/>}/>
 
 
-            <Route path='/profile/*' element={<ProfilePage user={user}/>}/>
-            <Route path='/cart' element={<CartPage/>}/>
-            <Route path='/wishlist' element={<WishListPage/>}/>
-            <Route path='/checkout' element={<CheckoutPage/>}/>
+            <Route path='/profile/*' element={
+                <ProtectedRoute>
+                    <ProfilePage user={user}/>
+                </ProtectedRoute>
+            }/>
+            <Route path='/cart' element={
+                <ProtectedRoute>
+                    <CartPage/>
+                </ProtectedRoute>
+            }/>
+            <Route path='/wishlist' element={
+                <ProtectedRoute>
+                    <WishListPage/>
+                </ProtectedRoute>
+            }/>
+            <Route path='/checkout' element={
+                <ProtectedRoute>
+                    <CheckoutPage/>
+                </ProtectedRoute>
+            }/>
 
             <Route path='/menu/:id' element={<MenuDetailsPage/>}/>
         </Routes>

@@ -25,9 +25,13 @@ interface AuthInterface
 
     public function createUser(array $data);
 
+    public function checkSocialUserEmail($email);
+
     public function socialUser($user_id,$provider);
 
     public function findSocialUser($user_id);
+
+
 }
 
 ?>

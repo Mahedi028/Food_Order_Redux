@@ -154,6 +154,7 @@ async({
 
 export const resetPassword=createAsyncThunk("auth/resetPassword",
 async({
+    email,
     token,
     password,
     password_confirmation
@@ -162,6 +163,7 @@ async({
     //define data
     const formData=new FormData()
 
+    formData.append("email",email)
     formData.append("token",token)
     formData.append("password",password)
     formData.append("password_confirmation",password_confirmation)
@@ -181,7 +183,7 @@ async({
     }
     try{
         //define url
-        const url=AppUrl.resetPassword
+        const url=AppUrl.PostResetPassword
         console.log(url)
         const response=await axios.post(url,formData,config)
 
@@ -189,6 +191,51 @@ async({
             return response.data
         }
     }catch(error){
+        // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message)
+      } else {
+        return rejectWithValue(error.message)
+      }
+    }
+})
+
+export const googleLoginRedirect=createAsyncThunk("auth/googleLoginRedirect",
+async(rejectWithValue)=>{
+
+    try{
+        //define url
+        const url=AppUrl.ProviderLoginRedirect("google")
+        const response=await axios.get(url)
+
+    // if(response.status===200){
+        // console.log('response-cate',response.data)
+        return response.data.data
+    // }
+    }
+    catch(error){
+        // return custom error message from API if any
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message)
+      } else {
+        return rejectWithValue(error.message)
+      }
+    }
+})
+export const googleLoginCallback=createAsyncThunk("auth/googleLoginCallback",
+async({callback_url},{rejectWithValue})=>{
+
+    try{
+        //define url
+        const url=AppUrl.ProviderLoginCallback("google")
+        const response=await axios.get(`${url}${callback_url}`)
+
+    // if(response.status===200){
+        // console.log('response-cate',response.data)
+        return response.data
+    // }
+    }
+    catch(error){
         // return custom error message from API if any
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message)

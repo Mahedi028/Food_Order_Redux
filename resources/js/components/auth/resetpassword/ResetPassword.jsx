@@ -17,6 +17,7 @@ const ResetPassword = () => {
 
 
     const [values, setValues]=useState({
+        email:"",
         token:null,
         password:"",
         password_confirmation:"",
@@ -44,6 +45,17 @@ const ResetPassword = () => {
         },
         {
             id:2,
+            type:"email",
+            name:"email",
+            placeholder:"Enter Email",
+            label:"Email",
+            // errorMessage:"It should be a valid email address",
+            errorMessage:validationErrors.email,
+            pattern:"/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i",
+            required:true
+        },
+        {
+            id:3,
             type:"password",
             name:"password",
             placeholder:"Enter Password",
@@ -54,7 +66,7 @@ const ResetPassword = () => {
             // required:true
         },
         {
-            id:3,
+            id:4,
             type:"password",
             name:"password_confirmation",
             placeholder:"Enter Current Password",
@@ -73,8 +85,15 @@ const ResetPassword = () => {
 
     const validate=(values)=>{
         const errors={};
+        const emailRegex= /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
         const passwordRegex= /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/
 
+
+        if(!values.email){
+            errors.email="Email is required";
+        }else if(!emailRegex.test(values.email)){
+            errors.email="It should be a valid email address";
+        }
         if(!values.token){
             errors.token="Token is required";
         }
@@ -149,6 +168,7 @@ const ResetPassword = () => {
 
             //resetform
             setValues({
+                email:"",
                 token:"",
                 password:"",
                 password_confirmation:""
