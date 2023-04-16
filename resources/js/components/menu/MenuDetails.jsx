@@ -1,21 +1,50 @@
-import React, { Fragment,useEffect }from 'react'
+import React, { Fragment,useEffect, useState}from 'react'
 import {Col, Row} from 'react-bootstrap'
 import classes from './menudetails.module.css'
 import FormSelect, { SelectOptions } from '../UI/formselect/FormSelect'
 import CartButton from '../UI/button/cartbutton/CartButton'
 import CartItem from '../cart/CartItem'
 import Bedge from '../UI/bedge/Bedge'
+import { fetchCartItems, addToCart } from '../../store/cart/cartActions'
+import { useDispatch,useSelector } from 'react-redux'
+
 const MenuDetails = (props) => {
 
-    const{title,discount_price,price,meal_thumbnail,meal_img1,meal_img2,meal_img3,active,in_stock,ingredients,dietary_info}=props.menuDetails
+    const [quantity,setQuantity]=useState(1)
+
+    const dispatch=useDispatch()
+
+    const {email}=useSelector((state)=>state.user.userData || {})
+    let {cartItems,pageRefreshStatus,success,deleteSuccess}=useSelector((state)=>state.cart)
+
+
+    const{id,title,discount_price,price,meal_thumbnail,meal_img1,meal_img2,meal_img3,active,in_stock,ingredients,dietary_info}=props.menuDetails
 
     const allIngredients= typeof ingredients === 'string' ? ingredients.split(",") : '';
     const allDietaryInfos= typeof dietary_info === 'string' ? dietary_info.split(",") : '';
 
+    const PageRefresh=()=>{
+        if(pageRefreshStatus===true){
+            let refresh=window.location.reload()
+            return refresh
+        }
+    }
+
+    const handleInputChange=(e)=>{
+        setQuantity(e.target.value)
+    }
+
+    if(success===true){
+        cogoToast.success("Menu Add to Cart successfully")
+    }
+
+
 
     useEffect(() => {
+        dispatch(fetchCartItems({email}))
+    }, [props.menuDetails, dispatch])
 
-    }, [props.menuDetails])
+
 
 
   return (
@@ -58,12 +87,22 @@ const MenuDetails = (props) => {
                         <h6 className='text-center mt-3'>Price ${price}</h6>
                     </div>
                     <div className='d-flex flex-column'>
-                        <FormSelect>
+                        <FormSelect
+                             name="division_id"
+                             label="Division"
+                             className='mb-1'
+                             onChange={handleInputChange}
+                            //  errorMessage={validationErrors.division}
+                        >
                             <SelectOptions value="1" option_name="1"/>
                             <SelectOptions value="2" option_name="2"/>
                             <SelectOptions value="3" option_name="3"/>
                         </FormSelect>
-                        <CartButton>ADD TO CART</CartButton>
+                        <CartButton
+                            onClick={()=>dispatch(addToCart({id,email,quantity}))}
+                        >
+                            ADD TO CART
+                        </CartButton>
                     </div>
                     <hr/>
                     <div className="mt-2">
@@ -82,10 +121,19 @@ const MenuDetails = (props) => {
                 </Col>
                 <Col lg={4} md={4} sm={12}>
                 <h2>Cart Itmes</h2>
-                    <CartItem/>
+                    {
+                        cartItems?cartItems && cartItems.length>0 &&cartItems.map((cartItem)=>{
+                            return <CartItem cart={cartItem} status={deleteSuccess}/>
+                        }):(
+                            <div>
+                                <h2>No Items in Cart Keep Shopping</h2>
+                            </div>
+                        )
+                    }
                 </Col>
             </Row>
         </div>
+        {PageRefresh()}
     </Fragment>
   )
 }

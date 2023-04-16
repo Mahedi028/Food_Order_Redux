@@ -16,7 +16,6 @@ import sslcommerz from '../../assets/payment/SSLCOMMERZ.png'
 import { fetchAllDistricts, fetchAllDivision, fetchAllStates } from '../../store/checkout/checkoutActions'
 const CheckoutForm = () => {
 
-
     //define all states
     const [values, setValues]=useState({
         name:"",
@@ -214,28 +213,37 @@ const CheckoutForm = () => {
             //if no errors occur then input values submit in the backend
             const{name,email,phone,address,post_code,division_id,district_id,state_id,payment_method}=values
 
+            if(payment_method==="stripe"){
+                return navigate('/payment/stripe',{
+                    state:{
+                        checkout:values
+                    }
+                    }
+                )
+            }
+
             //create an instance FormData
-            const formData=new FormData()
+            // const formData=new FormData()
 
             //send input value in the backend
-            formData.append("name",name)
-            formData.append("email",email)
-            formData.append("phone",phone)
-            formData.append("address",address)
-            formData.append("post_code",post_code)
-            formData.append("division_id",division_id)
-            formData.append("district_id",district_id)
-            formData.append("state_id",state_id)
-            formData.append("payment_method",payment_method)
+            // formData.append("name",name)
+            // formData.append("email",email)
+            // formData.append("phone",phone)
+            // formData.append("address",address)
+            // formData.append("post_code",post_code)
+            // formData.append("division_id",division_id)
+            // formData.append("district_id",district_id)
+            // formData.append("state_id",state_id)
+            // formData.append("payment_method",payment_method)
 
             //change submit button value
             sendBtn.innerHTML="Submitting.....";
 
             //console
-            console.log("Form Data");
-            for (let obj of formData) {
-                console.log(obj);
-            }
+            // console.log("Form Data");
+            // for (let obj of formData) {
+            //     console.log(obj);
+            // }
             //configure api url and axios
 
 
@@ -251,6 +259,7 @@ const CheckoutForm = () => {
         }
 
     }
+
 
 
   return (
@@ -352,7 +361,7 @@ const CheckoutForm = () => {
                                 </Col>
                             </Row>
                             <hr/>
-                            <h2>Payment Options</h2>
+                            <h2>Choose Payment Method</h2>
                             <Row className='p-1'>
                                 {/* <Col lg={4} md={4} sm={12} className='d-flex flex-column justify-content-between'> */}
                                    {paymentOptionView}

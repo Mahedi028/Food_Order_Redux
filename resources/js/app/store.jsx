@@ -4,6 +4,7 @@ import menuSlice from "../store/menu/menuSlice";
 import checkoutSlice from "../store/checkout/checkoutSlice";
 import authSlice from "../store/auth/authSlice"
 import userSlice from "../store/user/userSlice";
+import cartSlice from "../store/cart/cartSlice"
 
 
 const store=configureStore({
@@ -12,7 +13,8 @@ const store=configureStore({
         menu:menuSlice,
         checkout:checkoutSlice,
         auth:authSlice,
-        user:userSlice
+        user:userSlice,
+        cart:cartSlice
     }
 })
 

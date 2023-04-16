@@ -13,6 +13,7 @@ import MenuDetailsPage from '../pages/MenuDetailsPage'
 import ActiveAccountPage from '../pages/auth/ActiveAccountPage'
 import GoogleCallback from '../pages/auth/social/GoogleCallback'
 import ProtectedRoute from './ProtectedRoute'
+import StripePaymentPage from '../pages/payment/StripePaymentPage'
 
 const AppRoute = (props) => {
     const user=props.user
@@ -32,6 +33,8 @@ const AppRoute = (props) => {
             <Route path='/resetpassword/:token' element={<ResetPasswordPage/>}/>
             <Route path='/login/google/callback' element={<GoogleCallback/>}/>
 
+            <Route path='/menu/:id' element={<MenuDetailsPage/>}/>
+
 
             <Route path='/profile/*' element={
                 <ProtectedRoute>
@@ -40,7 +43,7 @@ const AppRoute = (props) => {
             }/>
             <Route path='/cart' element={
                 <ProtectedRoute>
-                    <CartPage/>
+                    <CartPage user={user}/>
                 </ProtectedRoute>
             }/>
             <Route path='/wishlist' element={
@@ -54,7 +57,12 @@ const AppRoute = (props) => {
                 </ProtectedRoute>
             }/>
 
-            <Route path='/menu/:id' element={<MenuDetailsPage/>}/>
+            <Route path='/payment/stripe' element={
+                <ProtectedRoute>
+                    <StripePaymentPage/>
+                </ProtectedRoute>
+            }/>
+
         </Routes>
     </Fragment>
   )

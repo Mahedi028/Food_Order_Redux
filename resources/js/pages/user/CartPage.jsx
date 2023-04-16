@@ -1,11 +1,19 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Container, Row } from 'react-bootstrap'
 import Cart from '../../components/cart/Cart'
 
-const CartPage = () => {
+const CartPage = (props) => {
+
+    const user=props.user
+    
+    useEffect(() => {
+
+    }, [props.user])
+
+
   return (
     <Container fluid={true}>
-        <Cart/>
+        <Cart user={user}/>
     </Container>
   )
 }
