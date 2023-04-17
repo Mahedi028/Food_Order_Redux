@@ -49,6 +49,12 @@
 
 }
 
+.cart_actions{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 @media only screen and (max-width: 600px) {
     .menu__details__container{
         width: 90%;

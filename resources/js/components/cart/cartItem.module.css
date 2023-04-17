@@ -5,6 +5,7 @@
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.35);
     border-radius: 10px;
     /* background-color: brown; */
+    background-color: crimson;
 
 }
 .cart_content{
@@ -46,6 +47,11 @@
     font-size: 15px;
 }
 
+.cart__title{
+    color: #eee;
+    font-size: 1rem;
+    font-weight: 500;
+}
 
 
 button:hover{

@@ -24,8 +24,8 @@ const MenuCard = (props) => {
     }
 
   return (
-    <Fragment>
-            <div className={classes.menu__card__container} key={id}>
+    <Fragment key={id}>
+            <div className={classes.menu__card__container} >
                 <Link to={`/menu/${id}`} className='text-decoration-none'>
                     <img
                         src={meal_thumbnail}

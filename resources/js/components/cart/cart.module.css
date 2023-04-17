@@ -35,6 +35,7 @@
     width: 100px;
     height: 90px;
     border-radius: 5px;
+    object-fit: cover;
 }
 
 
@@ -123,6 +124,19 @@ tbody tr.hide td p {
     justify-content: space-around;
     align-items: center;
 
+}
+
+.menu__name{
+    text-align: center;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.total__price{
+    text-align: center;
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 500;
 }
 
 

@@ -4,17 +4,29 @@ import {BsCartFill} from 'react-icons/bs'
 import {FaUserAlt} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import CartButton from '../button/cartbutton/CartButton'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../../store/user/userSlice'
+import { countCartItem } from '../../../store/cart/cartActions'
 const NavBar = (props) => {
 
     const dispatch=useDispatch()
 
+    let {cartLength, success}=useSelector((state)=>state.cart)
+
     const user=props.user
 
-    useEffect(() => {
+    const {email}=user
 
-    }, [props.user])
+    useEffect(() => {
+        email?dispatch(countCartItem({email})):null
+    }, [props.user, dispatch])
+
+    const PageRefresh=()=>{
+        if(success===true){
+            let refresh=window.location.reload()
+            return refresh
+        }
+    }
 
     //condition rendering
     let button=""
@@ -25,7 +37,7 @@ const NavBar = (props) => {
                 <Link to='/cart' className={classes.nav__link}>
                     <CartButton className='d-flex justify-content-center align-items-center'>
                         <BsCartFill className={classes.nav__menu__icon}></BsCartFill>
-                        <h4><sup>3</sup></h4>
+                        <h4><sup>{cartLength}</sup></h4>
                     </CartButton>
                 </Link>
             </li>
@@ -83,6 +95,7 @@ const NavBar = (props) => {
             </li>
         </ul>
         {button}
+        {PageRefresh()}
     </nav>
   )
 }

@@ -7,7 +7,8 @@ import CartItem from '../cart/CartItem'
 import Bedge from '../UI/bedge/Bedge'
 import { fetchCartItems, addToCart } from '../../store/cart/cartActions'
 import { useDispatch,useSelector } from 'react-redux'
-
+import cogoToast from 'cogo-toast'
+import { Link } from 'react-router-dom'
 const MenuDetails = (props) => {
 
     const [quantity,setQuantity]=useState(1)
@@ -24,7 +25,7 @@ const MenuDetails = (props) => {
     const allDietaryInfos= typeof dietary_info === 'string' ? dietary_info.split(",") : '';
 
     const PageRefresh=()=>{
-        if(pageRefreshStatus===true){
+        if(success===true || deleteSuccess===true){
             let refresh=window.location.reload()
             return refresh
         }
@@ -120,16 +121,28 @@ const MenuDetails = (props) => {
                     </div>
                 </Col>
                 <Col lg={4} md={4} sm={12}>
-                <h2>Cart Itmes</h2>
+                <h2 className='text-center'>CART ITEMS</h2>
                     {
                         cartItems?cartItems && cartItems.length>0 &&cartItems.map((cartItem)=>{
-                            return <CartItem cart={cartItem} status={deleteSuccess}/>
+                            return <CartItem cart={cartItem}/>
                         }):(
                             <div>
                                 <h2>No Items in Cart Keep Shopping</h2>
                             </div>
                         )
                     }
+                    <div className={classes.cart_actions}>
+                        <Link to='/cart'>
+                            <CartButton>
+                                View Cart
+                            </CartButton>
+                        </Link>
+                        <Link to='/checkout'>
+                            <CartButton>
+                                Checkout
+                            </CartButton>
+                        </Link>
+                    </div>
                 </Col>
             </Row>
         </div>

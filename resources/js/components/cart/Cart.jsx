@@ -19,14 +19,14 @@ const Cart = (props) => {
 
     useEffect(() => {
         dispatch(fetchCartItems({email}))
-    }, [props.user, dispatch])
+    }, [props.user,dispatch])
 
     if(deleteSuccess===true){
         cogoToast.warn("Menu Cart Deleted")
     }
 
     const PageRefresh=()=>{
-        if(pageRefreshStatus===true){
+        if(deleteSuccess===true){
             let refresh=window.location.reload()
             return refresh
         }
@@ -47,11 +47,11 @@ const Cart = (props) => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Menu Name</th>
-                                <th>Image</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Action</th>
+                                <th className='text-center'>Menu Name</th>
+                                <th className='text-center'>Image</th>
+                                <th className='text-center'>Quantity</th>
+                                <th className='text-center'>Price</th>
+                                <th className='text-center'>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,8 +61,8 @@ const Cart = (props) => {
                                 const {id,menu_name,menu_image,total_price}=cartItem
                                 return (
                                     <tr key={id.toString()}>
-                                        <td>{menu_name}</td>
-                                        <td>
+                                        <td className={classes.menu__name}>{menu_name}</td>
+                                        <td className='d-flex justify-content-center align-items-center'>
                                             <img
                                                 src={menu_image}
                                                 className={classes.cart__image}
@@ -82,7 +82,7 @@ const Cart = (props) => {
                                             <SelectOptions value={quantity.toString()=="4"?'selected':''} option_name="4"/>
                                             </FormSelect>
                                         </td>
-                                        <td>${total_price}</td>
+                                        <td className={classes.total__price}>${total_price}</td>
                                         <td>
                                             <CartButton
                                                 onClick={()=>dispatch(removeCartItem({id}))}

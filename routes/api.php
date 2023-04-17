@@ -9,16 +9,17 @@ use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Api\User\ProfileController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictController;
 use App\Http\Controllers\Backend\DivisionController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\StripePaymentController;
+use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\Api\User\UserOrderController;
 use App\Http\Controllers\Api\Auth\SocialLoginController;
 use App\Http\Controllers\Api\Auth\ResetPasswordController;
 use App\Http\Controllers\Api\Auth\ForgetPasswordController;
-use App\Http\Controllers\Api\User\ProfileController;
-use App\Http\Controllers\Api\User\UserOrderController;
 
 /*
 |--------------------------------------------------------------------------

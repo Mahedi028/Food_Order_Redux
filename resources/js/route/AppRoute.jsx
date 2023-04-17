@@ -14,6 +14,7 @@ import ActiveAccountPage from '../pages/auth/ActiveAccountPage'
 import GoogleCallback from '../pages/auth/social/GoogleCallback'
 import ProtectedRoute from './ProtectedRoute'
 import StripePaymentPage from '../pages/payment/StripePaymentPage'
+import SslcommerzPage from '../pages/payment/SslcommerzPage'
 
 const AppRoute = (props) => {
     const user=props.user
@@ -60,6 +61,12 @@ const AppRoute = (props) => {
             <Route path='/payment/stripe' element={
                 <ProtectedRoute>
                     <StripePaymentPage/>
+                </ProtectedRoute>
+            }/>
+
+            <Route path='/payment/sslcommerz' element={
+                <ProtectedRoute>
+                    <SslcommerzPage user={user}/>
                 </ProtectedRoute>
             }/>
 

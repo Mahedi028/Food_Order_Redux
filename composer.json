@@ -8,6 +8,7 @@
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
+        "laravel/cashier": "^14.11",
         "laravel/framework": "^10.0",
         "laravel/jetstream": "*",
         "laravel/passport": "^11.8",

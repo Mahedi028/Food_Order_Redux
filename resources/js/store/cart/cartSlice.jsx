@@ -57,8 +57,8 @@ const cartSlice=createSlice({
             console.log("[state]",state);
             console.log("[action]",action);
             state.loading=false,
-            state.success=true,
-            state.pageRefreshStatus=true
+            state.success=true
+            // state.pageRefreshStatus=true
         },
         [addToCart.rejected]:(state,action)=>{
             state.loading=true,
@@ -86,9 +86,9 @@ const cartSlice=createSlice({
             console.log("[state]",state);
             console.log("[action]",action);
             state.loading=false,
-            state.deleteSuccess=true,
+            state.deleteSuccess=true
             // state.cartItems=action.payload
-            state.pageRefreshStatus=true
+            // state.pageRefreshStatus=true
 
         },
         [removeCartItem.rejected]:(state,action)=>{
@@ -102,10 +102,8 @@ const cartSlice=createSlice({
             console.log("[state]",state);
             console.log("[action]",action.payload);
             state.loading=false,
-            state.cartLength=parseInt(JSON.stringify(action.payload)),
+            state.cartLength=parseInt(JSON.stringify(action.payload))
             // state.cartItems=action.payload
-            state.pageRefreshStatus=true
-
         },
         [countCartItem.rejected]:(state,action)=>{
             state.loading=true,

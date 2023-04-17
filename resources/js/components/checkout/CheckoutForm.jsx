@@ -211,10 +211,17 @@ const CheckoutForm = () => {
             return
         }else{
             //if no errors occur then input values submit in the backend
-            const{name,email,phone,address,post_code,division_id,district_id,state_id,payment_method}=values
+            const{payment_method}=values
 
             if(payment_method==="stripe"){
                 return navigate('/payment/stripe',{
+                    state:{
+                        checkout:values
+                    }
+                    }
+                )
+            }else if(payment_method==="sslcommerz"){
+                return navigate('/payment/sslcommerz',{
                     state:{
                         checkout:values
                     }
@@ -348,9 +355,7 @@ const CheckoutForm = () => {
                     <Col lg={5} md={5} sm={12}>
                         <div className={classes.order__container}>
                             <Row className='mb-1'>
-                                <Col>
-                                    <CartItem/>
-                                </Col>
+
                             </Row>
                             <Row className='d-flex justify-content-between align-content-center mb-1'>
                                 <Col lg={6} md={6} sm={12}>
