@@ -12,7 +12,7 @@ const RegisterForm = () => {
     const dispatch=useDispatch()
     const navigate=useNavigate()
 
-    const {loading,user,token,error,success,message,googleLoginRedirectUrl}=useSelector((state)=>state.auth)
+    const {loading,user,token,error,success,message,googleLoginRedirectUrl,email_verification_token}=useSelector((state)=>state.auth)
 
     useEffect(() => {
         //redirect successful if user registered successful

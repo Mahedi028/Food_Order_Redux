@@ -49,10 +49,13 @@ class RegisterController extends Controller
                 'message'=>'User registered successfully.please check your email for account activation',
                 'token'=>$token,
                 'user'=>$user,
+                'email_verification_token'=>$user->email_verification_token
             ], 200);
         }catch(\Exception $e){
             return response()->json([
-                'error'=>$e->getMessage()
+                'error'=>$e->getMessage(),
+                'message'=>'Invaild user and password',
+                'user'=>null
             ], 400);
         }
     }//end of method
@@ -69,12 +72,6 @@ class RegisterController extends Controller
         try{
             $user=$this->auth->VerifyToken($token);
             if($user){
-                //update user table
-                // $this->auth->updateUser($token);
-                // $user->update([
-                //     'email_verified_at'=>Carbon::now(),
-                //     'email_verification_token'=>null
-                // ]);
                 return response()->json([
                     'account_active_status'=>true,
                     'message'=>'Account Active successful'
@@ -97,9 +94,6 @@ class RegisterController extends Controller
     public function UpdateToken($token)
     {
 
-        // return response()->json([
-        //     'token'=>$token
-        // ]);
         try{
             $data=$this->auth->updateUser($token);
             return response()->json([

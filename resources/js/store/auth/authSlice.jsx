@@ -13,7 +13,8 @@ const initialState={
     success:null,
     message:null,
     pageRefreshStatus:false,
-    googleLoginRedirectUrl:""
+    googleLoginRedirectUrl:"",
+    email_verification_token:"",
 }
 
 const authSlice=createSlice({
@@ -30,7 +31,8 @@ const authSlice=createSlice({
             // state.token=action.payload.token,
             state.message=action.payload.message,
             state.error=null,
-            state.success=true
+            state.success=true,
+            state.email_verification_token=action.payload.email_verification_token
         },
         [registerUser.rejected]:(state,action)=>{
             state.loading=true,
@@ -42,12 +44,12 @@ const authSlice=createSlice({
         [loginUser.fulfilled]:(state,action)=>{
             console.log("[login-action]",action.payload)
             state.loading=false,
-            state.user=action.payload.user,
-            state.token=action.payload.token,
+            action.payload.user?state.user=action.payload.user:{},
+            action.payload.token?state.token=action.payload.token:null,
             state.message=action.payload.message,
             state.error=null,
             state.success=true,
-            state.isLoggedIn=true,
+            state.isLoggedIn=action.payload.isLoggedIn,
             state.pageRefreshStatus=true
         },
         [loginUser.rejected]:(state,action)=>{

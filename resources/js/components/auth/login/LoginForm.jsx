@@ -1,19 +1,18 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, Fragment} from 'react'
 import classes from './loginform.module.css'
 import FormInput from '../../UI/forminput/FormInput'
 import SubmitButton from '../../UI/button/submitbutton/SubmitButton'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../../store/auth/authActions'
+import cogoToast from 'cogo-toast'
 
 const LoginForm = () => {
 
     const dispatch=useDispatch();
     const navigate=useNavigate();
 
-    const {isLoggedIn,token}=useSelector((state)=>state.auth);
-
-
+    const {isLoggedIn,token, message, pageRefreshStatus}=useSelector((state)=>state.auth);
 
     const [values, setValues]=useState({
         email:"",
@@ -27,6 +26,12 @@ const LoginForm = () => {
     }, [])
 
 
+    const PageRefresh=()=>{
+        if(pageRefreshStatus===true){
+            let refresh=window.location.reload()
+            return refresh
+        }
+    }
 
     const inputs=[
         {
@@ -140,36 +145,42 @@ const LoginForm = () => {
     }
 
 
-    if(isLoggedIn===true &&localStorage.getItem("token")){
+    if(isLoggedIn===true &&localStorage.getItem("token")!=null){
         return navigate('/profile')
     }else{
         return (
-            <div className={classes.form__container}>
-                <div className="form_errors">
-                    <h5 className='text-center'>Login</h5>
+            <Fragment>
+                <div className={classes.form__container}>
+                    <div className="form_errors">
+                        {
+                            message?(<h4 className={classes.form__error__message}>{message}</h4>):""
+                        }
+                        <h5 className='text-center'>Login</h5>
+                    </div>
+                    <form onSubmit={handleSubmit} className={classes.register__form}>
+                    {
+                        inputs.map((input)=>{
+                            return <FormInput
+                                        key={input.id}
+                                        {...input}
+                                        value={values[input.name]}
+                                        className="mb-2"
+                                        onChange={handleInputChange}
+                                    />
+                        })
+                    }
+                    <SubmitButton
+                        type="submit"
+                        id="sendBtn"
+                    >login</SubmitButton>
+                    </form>
+                    <div className="d-flex flex-column justify-content-center align-items-center mb-2">
+                        <Link to='/register' className='mb-2'>Do not have an account?</Link>
+                        <Link to='/forgetpassword' >forget password?</Link>
+                    </div>
                 </div>
-                <form onSubmit={handleSubmit} className={classes.register__form}>
-                {
-                    inputs.map((input)=>{
-                        return <FormInput
-                                    key={input.id}
-                                    {...input}
-                                    value={values[input.name]}
-                                    className="mb-2"
-                                    onChange={handleInputChange}
-                                />
-                    })
-                }
-                <SubmitButton
-                    type="submit"
-                    id="sendBtn"
-                >login</SubmitButton>
-                </form>
-                <div className="d-flex flex-column justify-content-center align-items-center mb-2">
-                    <Link to='/register' className='mb-2'>Do not have an account?</Link>
-                    <Link to='/forgetpassword' >forget password?</Link>
-                </div>
-            </div>
+            {PageRefresh()}
+            </Fragment>
           )
 
     }

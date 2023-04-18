@@ -20,24 +20,41 @@ class LoginController extends Controller
     public function Login(LoginRequest $request)
     {
         try{
-            if(Auth::attempt($request->only('email','password'))){
-                $user=Auth::user();
-                $token=$user->createToken('app')->accessToken;
 
-                return response()->json([
-                    'message'=>"User successfully loggedIn",
-                    'user'=>$user,
-                    'token'=>$token
-                    ], 200);
+            if(Auth::attempt($request->only('email','password'))){
+
+                //create authenticated user
+                $user=Auth::user();
+
+                //email_verification_token is null or not
+                if($user->email_verification_token!=null){
+                    return response()->json([
+                        'isLoggedIn'=>false,
+                        'message'=>"User Account not activated please check your email and activate your account to login",
+                        ], 200);
+                }else{
+                    //vaild user token created
+                    $token=$user->createToken('app')->accessToken;
+
+                    return response()->json([
+                        'isLoggedIn'=>true,
+                        'message'=>"User successfully loggedIn",
+                        'user'=>$user,
+                        'token'=>$token
+                        ], 200);
+                }
             }
         }catch(\Exception $e){
             return response()->json([
-                'error'=>$e->getMessage()
+                'error'=>$e->getMessage(),
+                'message'=>$e->getMessage(),
+                // 'user'=>null,
             ]);
         }
 
         return response()->json([
-            'message'=>'Invalid email and password'
+            'message'=>'Invalid email and password',
+            // 'user'=>null
         ],201);
 
     }//end of method

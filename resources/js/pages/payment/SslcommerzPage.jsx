@@ -29,7 +29,7 @@ const SslcommerzPage = (props) => {
             total_amount:cartTotal
         }))
 
-    }, [props.user,location.state])
+    }, [props.user])
 
     if(redirectGatewayURL){
         window.location.replace(redirectGatewayURL);

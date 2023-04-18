@@ -49,8 +49,6 @@ async({
         if(response.status===200){
             return response.data
         }
-
-
     }catch(error){
         // return custom error message from API if any
       if (error.response && error.response.data.message) {
@@ -93,7 +91,7 @@ async({
 
         if(response.status===200){
             // store user's token in local storage
-            localStorage.setItem('token', response.data.token)
+            response.data.token?localStorage.setItem('token', response.data.token):null
             return response.data
         }
 
