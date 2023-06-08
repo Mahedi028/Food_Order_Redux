@@ -80,10 +80,14 @@ $post_data['value_c']="ref003_C";
 $post_data['value_d']="ref004_D";
 
 # REQUEST SEND TO SSLCOMMERZ
-$direct_api_url = "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
+// $direct_api_url = "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
+
+$apiDomain=config('sslcommerz.apiDomain');
+$make_payment_api_url =$apiDomain.config('sslcommerz.apiUrl.make_payment');
+
 
 $handle = curl_init();
-curl_setopt($handle, CURLOPT_URL, $direct_api_url );
+curl_setopt($handle, CURLOPT_URL, $make_payment_api_url );
 curl_setopt($handle, CURLOPT_TIMEOUT, 30);
 curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 30);
 curl_setopt($handle, CURLOPT_POST, 1 );
@@ -166,7 +170,7 @@ if(isset($sslcz['GatewayPageURL']) && $sslcz['GatewayPageURL']!="" ) {
 
                 //send order mail
                 $invoice=$this->order->findOrderbyId($order_id);
-               
+
 
                 $mailData=[
                     'invoice_no'=>$invoice[0]['invoice_no'],

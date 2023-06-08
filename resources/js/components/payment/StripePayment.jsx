@@ -6,7 +6,7 @@ import { CardCvcElement, CardElement, CardExpiryElement, CardNumberElement, Elem
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {loadStripe} from '@stripe/stripe-js';
-
+import {confirmOrder} from '../../store/order/orderActions'
 
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.
@@ -27,9 +27,10 @@ const Payment=(props)=>{
 
     const {message}=useSelector((state)=>state.order)
     let {cartItems}=useSelector((state)=>state.cart)
-    const {name,email,phone,address,post_code,division_id,district_id,state_id}=props.checkout
+    const {id,email}=useSelector((state)=>state.user.userData || {})
+    const {name,phone,address,post_code,division_id,district_id,state_id}=props.checkout
 
-    const cartTotal=cartItems.reduce((sum,curr)=>sum+parseInt(curr.total_price),0)
+    const cartTotal=cartItems.reduce((sum,curr)=>sum+parseInt(curr.total_price),10)
 
     useEffect(() => {
 
@@ -84,11 +85,12 @@ const Payment=(props)=>{
           return;
         }
 
-        const card = elements.getElement(CardElement);
+        // const card = elements.getElement(CardElement);
+        const card = elements.getElement(CardCvcElement, CardExpiryElement, CardNumberElement);
         console.log("[card]",card)
         const result = await stripe.createToken(card);
 
-        console.log("[card]",result)
+        console.log("[card-result]",result)
         if (result.error) {
           // Show error to your customer.
           console.log(result.error.message);

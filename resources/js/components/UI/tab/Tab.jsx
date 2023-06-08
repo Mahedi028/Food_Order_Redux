@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux';
 import MenuCard from '../../menu/MenuCard';
 function CustomTab({ title, active, onClick, children, img }) {
 
-
-
   return (
     <div
       className={`tab ${active ? 'active' : ''}`}
@@ -27,12 +25,6 @@ function CustomTab({ title, active, onClick, children, img }) {
 function Tab() {
 
     const categories=useSelector((state)=>state.category.categories)
-
-
-
-
-
-
     const [activeTab, setActiveTab] = useState(1);
 
 

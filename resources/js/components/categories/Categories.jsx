@@ -17,7 +17,7 @@ const Categories = () => {
 
   return (
     <Fragment>
-    <div className={classes.categories__title}>Explore Foods</div>
+        <div className={classes.categories__title}>Explore Foods</div>
         <Tab/>
     </Fragment>
   )

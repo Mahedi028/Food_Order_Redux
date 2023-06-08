@@ -47,6 +47,13 @@ Route::prefix('v1')->group(function(){
     Route::get('/active/{token}', [RegisterController::class, 'ActiveAccount']);
     //----update token
     Route::put('/updatetoken/{token}', [RegisterController::class,'UpdateToken']);
+    //-----account activation with activation code
+    Route::get('/verification/{id}', [UserController::class, 'Verification']);
+    //validated email verification otp
+    Route::post('/verified',[UserController::class, 'VerifyOtp']);
+    //resend otp
+    Route::get('/resend-otp', [UserController::class, 'ResendOtp']);
+
     //forget-password
     Route::post('/forgetpassword',[ForgetPasswordController::class,'ForgetPassword']);
     //reset-password
@@ -78,6 +85,7 @@ Route::prefix('v1')->group(function(){
 
     //--------------------Category api starts-----------------------------//
     Route::get('/allcategory', [CategoryController::class, 'ShowAllCategories']);
+    // Route::get('/menu/{id}', [CategoryController::class, 'GetMenusByCategoryId']);
     Route::get('/menulistbycategory',[CategoryController::class, 'MenuListByCategory']);
     //--------------------Category api starts-----------------------------//
 

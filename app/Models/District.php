@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class District extends Model
 {
     use HasFactory;
-
     protected $guarded=[];
 
     public function division()
@@ -22,4 +21,5 @@ class District extends Model
     {
         return $this->hasMany(State::class);
     }
+
 }

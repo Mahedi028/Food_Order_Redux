@@ -25,16 +25,16 @@ use App\Http\Controllers\SslCommerzPaymentController;
 
 
 
-// Route::middleware(['auth:sanctum,admin',config('jetstream.auth_session'),'verified'
-// ])->group(function () {
-//     Route::get('/admin/dashboard', function () {
-//         return view('admin.admin_master');
-//     })->name('admin.dashboard')->middleware('auth:admin');
-// });
-
-Route::get('/admin/dashboard', function(){
-    return view('admin.index');
+Route::middleware(['auth:sanctum,admin',config('jetstream.auth_session'),'verified'
+])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.admin_master');
+    })->name('admin.dashboard')->middleware('auth:admin');
 });
+
+// Route::get('/admin/dashboard', function(){
+//     return view('admin.index');
+// });
 
 
 
@@ -202,9 +202,9 @@ Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
 Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
 
 Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::get('/payment/success', [SslCommerzPaymentController::class, 'success']);
 Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
 Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
-
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
 

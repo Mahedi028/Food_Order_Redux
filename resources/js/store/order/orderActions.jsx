@@ -50,7 +50,7 @@ async({
         const response=await axios.post(url,formData,config)
 
         if(response.status===200){
-            console.log("[order]",response.data)
+            console.log("[order-stripe]",response.data.data)
             return response.data.data
         }
     }catch(error){

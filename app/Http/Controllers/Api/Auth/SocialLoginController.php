@@ -69,6 +69,8 @@ class SocialLoginController extends Controller
                 $data['name']=$userSocial->getName();
                 $data['password']='12345';
                 $data['phone_number']=null;
+                $data['profile_photo_path']=$userSocial->getAvatar();
+
                 //create user in user table
                 $userCreated=$this->auth->createUser($data);
 

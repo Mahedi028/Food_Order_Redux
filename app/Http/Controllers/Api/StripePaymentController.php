@@ -82,6 +82,8 @@ class StripePaymentController extends Controller
         $data['operational_status']='pending';
         $data['processed_by']=null;
 
+
+
         try{
             $orderItems=[];
             $order_id=$this->order->postOrder($data);
@@ -99,12 +101,13 @@ class StripePaymentController extends Controller
             $this->cart->removeAllFromCart($data['email']);
 
             //send order mail
-            $invoice=$this->order->findOrderbyId($order_id);
+            $order=$this->order->findOrderbyId($order_id);
+
             $mailData=[
-                'invoice_no'=>$invoice->invoice_no,
+                'invoice_no'=>$order[0]->invoice_no,
                 'amount'=>$amount,
-                'name'=>$invoice->name,
-                'email'=>$invoice->email
+                'name'=>$order[0]->name,
+                'email'=>$order[0]->email
             ];
 
             Mail::to($request->email)->send(new OrderMail($mailData));

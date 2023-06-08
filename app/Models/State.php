@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class State extends Model
 {
     use HasFactory;
-
     protected $guarded=[];
 
     public function district()
@@ -21,4 +20,5 @@ class State extends Model
     {
         return $this->belongsTo(Division::class,'division_id','id');
     }
+
 }

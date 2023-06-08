@@ -66,6 +66,18 @@
     padding: 20px;
   }
 
+  .tab__header{
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    background-color: crimson;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
   .content {
     display: flex;
     justify-content: space-around;
@@ -95,5 +107,39 @@
         color: black;
         padding: 20px 20px;
       }
+      .tab__container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        /* background-color: crimson; */
+        max-width: 1200px;
+        border-radius: 10px;
+        margin: 0 auto;
+      }
+
+      .tab__list {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        /* background-color: crimson; */
+        border-radius: 10px;
+        margin: 0.8rem auto;
+        overflow: auto;
+        overflow: overlay;
+      }
+
+      .tab__list::-webkit-scrollbar{
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+
+    .tab__list::-webkit-scrollbar-thumb{
+        border-radius: .5rem;
+        background-color: #0004;
+        visibility: hidden;
+    }
+    .tab__list:hover::-webkit-scrollbar-thumb{
+        visibility: visible;
+    }
 
 }

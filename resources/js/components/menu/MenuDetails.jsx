@@ -8,12 +8,15 @@ import Bedge from '../UI/bedge/Bedge'
 import { fetchCartItems, addToCart } from '../../store/cart/cartActions'
 import { useDispatch,useSelector } from 'react-redux'
 import cogoToast from 'cogo-toast'
-import { Link } from 'react-router-dom'
+import { Link,Navigate, useNavigate } from 'react-router-dom'
+
+
 const MenuDetails = (props) => {
 
     const [quantity,setQuantity]=useState(1)
 
     const dispatch=useDispatch()
+    const navigate=useNavigate()
 
     const {email}=useSelector((state)=>state.user.userData || {})
     let {cartItems,pageRefreshStatus,success,deleteSuccess}=useSelector((state)=>state.cart)
@@ -44,6 +47,17 @@ const MenuDetails = (props) => {
     useEffect(() => {
         dispatch(fetchCartItems({email}))
     }, [props.menuDetails, dispatch])
+
+
+    const handleAddToCartHandler=()=>{
+        if(email){
+            dispatch(addToCart({id,email,quantity}))
+        }else{
+            cogoToast.warn("Login First")
+            return navigate('/profile')
+        }
+
+    }
 
 
 
@@ -100,7 +114,8 @@ const MenuDetails = (props) => {
                             <SelectOptions value="3" option_name="3"/>
                         </FormSelect>
                         <CartButton
-                            onClick={()=>dispatch(addToCart({id,email,quantity}))}
+                            // onClick={()=>dispatch(addToCart({id,email,quantity}))}
+                            onClick={handleAddToCartHandler}
                         >
                             ADD TO CART
                         </CartButton>

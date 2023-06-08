@@ -3,7 +3,8 @@ import { Container, Row, Col} from 'react-bootstrap'
 import Banner from '../components/banner/Banner'
 import Categories from '../components/categories/Categories'
 import Layout from '../components/layout/Layout'
-
+import ServiceBoard from '../components/home/ServiceBoard'
+import FoodGallery from '../components/home/FoodGallery'
 const HomePage = () => {
   return (
     <Fragment>
@@ -11,8 +12,14 @@ const HomePage = () => {
         <Row className='mb-2'>
             <Banner/>
         </Row>
-        <Row>
+        <Row className='mb-2'>
             <Categories/>
+        </Row>
+        <Row className='mb-2'>
+            <ServiceBoard/>
+        </Row>
+        <Row>
+            <FoodGallery/>
         </Row>
         </Container>
     </Fragment>
